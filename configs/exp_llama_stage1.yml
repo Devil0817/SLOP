@@ -1,0 +1,97 @@
+{
+  "pipe-parallel-size": 4,
+  "model-parallel-size": 1,
+  #"pipe_partition_method":"parameters",
+
+  # model settings
+  "num-layers": 6,
+  "hidden-size": 2816,
+  "num-attention-heads": 22,
+  "seq-length": 1024, 
+  "max-position-embeddings": 1024,
+  "intermediate-size": 7680,
+  "norm": "rmsnorm",
+  # "activation": "swiglu",
+  "activation": "silu",
+  "mlp_type":"llama",
+  "pos-emb": "rotary",
+  "no-weight-tying": true,
+  "gpt-j-residual": false,
+  "output-layer-parallelism": "column",
+
+  "scaled-upper-triang-masked-softmax-fusion": false,
+  "bias-gelu-fusion": false,
+  "use_bias_in_attn_linear": false,
+
+  # init methods
+  "init_method": "small_init",
+  "output_layer_init_method": "wang_init",
+
+  "optimizer": {
+    "type": "Adam",
+    "params": {
+      "lr": 0.000003,
+      "betas": [0.9, 0.95],
+      "eps": 1.0e-8,
+    }
+  },
+  "min_lr": 0.0000003,
+  "override_lr_scheduler": true,
+ 
+  # for all zero_optimization options, see https://www.deepspeed.ai/docs/config-json/#zero-optimizations-for-fp16-training
+  "zero_optimization": {
+    "stage": 1,
+    "allgather_partitions": True,
+    "allgather_bucket_size": 500000000,
+    "overlap_comm": True,
+    "reduce_scatter": True,
+    "reduce_bucket_size": 500000000,
+    "contiguous_gradients": True,
+  },
+
+  "train_micro_batch_size_per_gpu": 1,
+  "gradient_accumulation_steps": 32, 
+  # "train_batch_size": 4,
+  #"gas": 36,
+  "data-impl": "mmap",
+  #"num_workers": 1,
+
+  # activation checkpointing
+  "checkpoint-activations": true,
+  "checkpoint-num-layers": 1,
+  "partition-activations": true,
+  "synchronize-each-layer": true,
+
+  # regularization
+  "gradient_clipping": 0.5,
+  #"clip_grad": 1.0,
+  "weight-decay": 0.005,
+  "hidden-dropout": 0,
+  "attention-dropout": 0,
+
+  # precision settings
+  "fp16": {
+    "fp16": true,
+    "enabled": true,
+    "loss_scale": 0,
+    "loss_scale_window": 1000,
+   
+    "hysteresis": 2,
+    "min_loss_scale": 1,
+  },
+
+  "train-iters": 762940,  #152588,
+  "lr-decay-iters": 762940, # 152588,
+  "distributed-backend": "nccl",
+  "lr-decay-style": "cosine",
+  "warmup": 0.01,
+  "checkpoint-factor": 5000,
+  "eval-interval": 1000,
+  "eval-iters": 10,
+
+  "log-interval": 1,
+  "steps_per_print": 1,
+  "keep-last-n-checkpoints": 40,
+  "wall_clock_breakdown": true,
+  #  "use_node_local_storage": true,
+  }

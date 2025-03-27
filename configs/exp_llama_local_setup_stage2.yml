@@ -1,0 +1,77 @@
+{
+     "train-data-paths": [
+        "./data0829/24split11000000",
+        "./data0829/7split11000000",
+        "./data0829/23split11000000",
+        "./data0829/31split11000000",
+        "./data0829/15split11000000",
+        "./data0829/5split11000000",
+        "./data0829/9split11000000",
+        "./data0829/6split11000000",
+        "./data0829/22split11000000",
+    ],
+    "test-data-paths": [
+        "./data0829/24split1000000",
+        "./data0829/7split1000000",
+        "./data0829/23split1000000",
+        "./data0829/31split1000000",
+        "./data0829/15split1000000",
+        "./data0829/5split1000000",
+        "./data0829/9split1000000",
+        "./data0829/6split1000000",
+        "./data0829/22split1000000"
+    ],
+    "valid-data-paths": [
+        "./data0829/24split1000000",
+        "./data0829/7split1000000",
+        "./data0829/23split1000000",
+        "./data0829/31split1000000",
+        "./data0829/15split1000000",
+        "./data0829/5split1000000",
+        "./data0829/9split1000000",
+        "./data0829/6split1000000",
+        "./data0829/22split1000000"
+    ],
+
+    "train-data-weights": [
+        0.33,
+        0.15,
+        0.18,
+        0.06,
+        0.09,
+        0.03,
+        0.08,
+        0.03,
+        0.05
+    ],
+    "test-data-weights": [
+        0.33,
+        0.15,
+        0.18,
+        0.06,
+        0.09,
+        0.03,
+        0.08,
+        0.03,
+        0.05
+    ],
+    "valid-data-weights": [
+        0.33,
+        0.15,
+        0.18,
+        0.06,
+        0.09,
+        0.03,
+        0.08,
+        0.03,
+        0.05
+    ],
+    "vocab-file": "./llama.model",
+    "tokenizer_type": "SPMTokenizer",
+    "save": "./exp_checkpoint",
+    "load": "./exp_checkpoint2",
+    "checkpoint_validation_with_forward_pass": false,
+    "tensorboard-dir": "tensorboard",
+    "log-dir": "./exp_logs",
+    "use_wandb": false,
+}
